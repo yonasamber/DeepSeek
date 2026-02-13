@@ -23,6 +23,8 @@ const PromptBox = ({ isLoading, setIsLoading }) => {
     try {
       e.preventDefault();
       if (!user) return toast.error("Login to send message");
+      if (!selectedChat) return toast.error("Select a chat first");
+
       if (isLoading)
         return toast.error("Wait for the previous prompt response");
 
@@ -109,7 +111,7 @@ const PromptBox = ({ isLoading, setIsLoading }) => {
   return (
     <form
       onSubmit={sendPrompt}
-      className={`wi-full ${false ? "max-w-3xl" : "max-w-2xl"} bg-[#404045] p-4 rounded-3xl mt-4 transition-all`}
+      className={`wi-full ${selectedChat?.messages?.length > 0 ? "max-w-3xl" : "max-w-2xl"} bg-[#404045] p-4 rounded-3xl mt-4 transition-all`}
     >
       <textarea
         onKeyDown={handleKeyDown}
